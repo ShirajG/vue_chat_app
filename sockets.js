@@ -1,10 +1,10 @@
 module.exports = function (io) {
   io.on('connection', function (socket) {
 
-    socket.emit('news', { message: 'Connected to chat.'});
+    socket.emit('statusChange', { status: 'Connected'});
 
-    socket.on('increment', function (data) {
-      console.log('incremented');
+    socket.on('new message', function (data) {
+      io.emit('new message', data);
     })
   });
 }

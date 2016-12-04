@@ -1,5 +1,6 @@
 <template>
-  <chatApp></chatApp>
+  <chatApp ref="chatApp"
+    :status="status"></chatApp>
 </template>
 
 <script>
@@ -10,15 +11,15 @@
     computed: {
     },
     data: function () {
-      return {}
+      return {
+        status: ""
+      }
     },
     methods: {},
     mounted: function () {
-      socket.on('news', function (data) {
-        console.log(data);
-        this.message = data.message;
+      socket.on('statusChange', function (data) {
+        this.status = data.status;
       }.bind(this))
-
    },
    components: {
     'chatApp': chatApp
