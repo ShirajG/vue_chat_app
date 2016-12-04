@@ -4,7 +4,8 @@
     "start": "node server.js",
     "start-dev": "nodemon server.js",
     "bundle": "webpack --progress --colors --watch",
-    "browser-sync": "browser-sync start --proxy='localhost:3000' --files='public/js/bundle.js, app/**/*.js, app/**/*.ejs' --reload-delay=800 --port=3030"
+    "browser-sync": "browser-sync start --proxy='localhost:3000' --files='public/js/bundle.js, app/**/*.js, app/**/*.ejs' --reload-delay=800 --port=3030",
+    "postinstall": "webpack -p --config ./webpack.config.js --progress"
   },
   "dependencies": {
     "body-parser": "^1.14.0",
