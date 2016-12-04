@@ -1,10 +1,12 @@
 <template>
   <div class="container">
     <div class="jumbotron">
-      <p>{{ count }}</p>
       <div class="chat-app">
-        <p> {{ status }} </p>
-        <messageArea v-if="status == 'Connected' "></messageArea>
+        <messageArea v-if="loggedIn" :user="user"></messageArea>
+        <form v-on:submit.prevent="logIn" v-else>
+          <label for="name">Enter a name</label>
+          <input v-model="user.name" name="name" type="text">
+        </form>
       </div>
     </div>
   </div>
@@ -23,12 +25,19 @@
     },
     data: function () {
       return {
-        greeting: "Check out this counter"
+        greeting: "Check out this counter",
+        loggedIn: false,
+        user: {}
       }
     },
     methods: {
       sendMessage: function () {
         this.$store.dispatch('sendMessage');
+      },
+      logIn: function () {
+        if(this.name !== "") {
+          this.loggedIn = true
+        }
       }
     },
     components: {

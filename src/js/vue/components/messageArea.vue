@@ -1,6 +1,5 @@
 <template>
   <div class="message-area">
-    <p>This is the message area component</p>
     <div id="messages" class="messages">
       <p v-for="message in messages" >
         <span class="username">{{ message.user}}: </span>
@@ -21,13 +20,11 @@
   module.exports = {
     name: 'messageArea',
     store: AppVeuxStore,
+    props: ['user'],
     computed: {
     },
     data: function () {
       return {
-        user: {
-          name: 'Anon' + this.uuid()
-        },
         messages: [],
         userMessage: ""
       }
