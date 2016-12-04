@@ -75,7 +75,10 @@ require('./app/routes')(app);
 
 // Load Models
 models.sequelize.sync().then( function() {
-  app.listen(app.get('port'), function() {
+  var server = app.listen(app.get('port'), function() {
     console.log('App listening at port ' + app.get('port'));
   });
+
+  var io = require('socket.io').listen(server);
+  require('./sockets')(io);
 })
