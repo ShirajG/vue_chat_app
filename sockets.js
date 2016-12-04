@@ -4,7 +4,7 @@ module.exports = function (io) {
     socket.emit('statusChange', { status: 'Connected'});
 
     socket.on('new message', function (data) {
-      io.emit('new message', data);
+      socket.broadcast.emit('new message', data);
     })
   });
 }

@@ -50,7 +50,7 @@
           user: this.user.name,
           text: this.userMessage
         }
-
+        this.messages.push(message);
         this.$store.dispatch('sendMessage', message);
       },
       clearUserMessage: function () {
@@ -58,6 +58,7 @@
       },
       receiveMessage: function (message) {
         this.messages.push(message);
+        this.scrollChatWindow();
       },
       uuid: function () {
         return Math.random(999999);
@@ -65,7 +66,7 @@
     },
     mounted: function () {
       socket.on('new message', function (data) {
-        this.messages.push(data);
+        this.receiveMessage(data);
       }.bind(this))
     }
   }
