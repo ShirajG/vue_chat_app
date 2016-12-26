@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="user-list-sidebar">
-      <userList></userList>
+      <userList :current-room-id='currentRoomId'></userList>
     </div>
 
     <div class="chat-app-container">
@@ -28,19 +28,19 @@
     computed: {
       count: function () {
         return this.$store.state.count;
+      },
+      currentRoomId: function() {
+        return this.$store.getters.currentRoomId;
       }
     },
     data: function () {
       return {
         greeting: "Check out this counter",
         loggedIn: false,
-        user: {}
+        user: {},
       }
     },
     methods: {
-      sendMessage: function () {
-        this.$store.dispatch('sendMessage');
-      },
       logIn: function () {
         if(this.name !== "") {
           this.loggedIn = true

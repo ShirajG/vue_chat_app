@@ -50,8 +50,12 @@
           user: this.user.name,
           text: this.userMessage
         }
+        var currentRoom = this.$store.getters.currentRoomId;
         this.messages.push(message);
-        this.$store.dispatch('sendMessage', message);
+        this.$store.dispatch('sendMessage', {
+          message: message,
+          roomId: currentRoom
+        });
       },
       clearUserMessage: function () {
         this.userMessage = "";

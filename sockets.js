@@ -4,7 +4,11 @@ module.exports = function (io) {
     socket.emit('statusChange', { status: 'Connected'});
 
     socket.on('new message', function (data) {
-      socket.broadcast.emit('new message', data);
+      socket.in(data.roomId).emit('new message', data.message);
+    })
+
+    socket.on('join room', function (data) {
+      socket.join(data);
     })
   });
 }

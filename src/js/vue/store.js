@@ -3,27 +3,48 @@ Vue.use(Vuex);
 module.exports = new Vuex.Store({
   state: {
     count: 0,
-    room: {
-      users: [
-        {
-          name: 'testguy'
-        }
-      ]
-    }
+    currentRoomId: 123,
+    rooms: [
+      {
+        id: 123,
+        users: [
+          {
+            name: "Testing",
+            id: 2234092432
+          }
+        ]
+      },
+      {
+        id: 456,
+        users: [
+          {
+            name: "Test User 2",
+            id: 242342345
+          }
+        ]
+      }
+    ]
   },
   mutations: {
-    decrement: function (state) {
-      state.count--;
+    JOIN_ROOM: function (state, data) {
+      state.currentRoomId = data.roomId;
     }
   },
   actions: {
     sendMessage: function (context, data) {
       socket.emit('new message', data);
+    },
+    joinRoom: function (context, data) {
+      context.commit('JOIN_ROOM', data);
+      socket.emit('join room', data.roomId);
     }
   },
   getters: {
-    room: function (state) {
-      return state.room
+    rooms: function (state) {
+      return state.rooms
+    },
+    currentRoomId: function (state) {
+      return state.currentRoomId
     }
   }
 })
