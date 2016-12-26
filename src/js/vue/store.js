@@ -22,11 +22,16 @@ module.exports = new Vuex.Store({
             id: 242342345
           }
         ]
+      },
+      {
+        id: 'lobby',
+        users: [
+        ]
       }
     ]
   },
   mutations: {
-    JOIN_ROOM: function (state, data) {
+    SWITCH_ROOM: function (state, data) {
       state.currentRoomId = data.roomId;
     }
   },
@@ -34,9 +39,9 @@ module.exports = new Vuex.Store({
     sendMessage: function (context, data) {
       socket.emit('new message', data);
     },
-    joinRoom: function (context, data) {
-      context.commit('JOIN_ROOM', data);
-      socket.emit('join room', data.roomId);
+    switchRoom: function (context, data) {
+      context.commit('SWITCH_ROOM', {roomId: data});
+      socket.emit('switch room', data);
     }
   },
   getters: {

@@ -5,14 +5,17 @@
     </div>
 
     <div class="chat-app-container">
-      <div class="jumbotron">
-        <div class="chat-app">
-          <messageArea v-if="loggedIn" :user="user"></messageArea>
-          <form v-on:submit.prevent="logIn" v-else>
-            <label for="name">Enter a name</label>
-            <input v-model="user.name" name="name" type="text">
-          </form>
-        </div>
+      <div class="chat-app">
+        <ul class="nav nav-tabs">
+          <li v-on:click.prevent="switchRoom('lobby', $event)" class="active" role="presentation"><a href="">Lobby</a></li>
+          <li v-on:click.prevent="switchRoom(123, $event)" role="presentation"><a href="">Other Room</a></li>
+          <li v-on:click.prevent="switchRoom(456, $event)" role="presentation"><a href="">Another Room</a></li>
+        </ul>
+        <messageArea roomId='lobby' v-if="loggedIn" :user="user"></messageArea>
+        <form v-on:submit.prevent="logIn" v-else>
+          <label for="name">Enter a name</label>
+          <input v-model="user.name" name="name" type="text">
+        </form>
       </div>
     </div>
   </div>
@@ -45,6 +48,11 @@
         if(this.name !== "") {
           this.loggedIn = true
         }
+      },
+      switchRoom: function (roomId, event) {
+        $('.nav-tabs li').removeClass('active');
+        $(event.target).parent().addClass('active');
+        this.$store.dispatch('switchRoom', roomId);
       }
     },
     components: {

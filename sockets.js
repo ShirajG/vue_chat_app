@@ -7,7 +7,7 @@ module.exports = function (io) {
       socket.in(data.roomId).emit('new message', data.message);
     })
 
-    socket.on('join room', function (data) {
+    socket.on('switch room', function (data) {
       socket.join(data);
     })
   });

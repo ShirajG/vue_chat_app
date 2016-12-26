@@ -20,7 +20,7 @@
   module.exports = {
     name: 'messageArea',
     store: AppVeuxStore,
-    props: ['user'],
+    props: ['user', 'roomId'],
     computed: {
     },
     data: function () {
@@ -66,6 +66,9 @@
       },
       uuid: function () {
         return Math.random(999999);
+      },
+      switchRoom: function (roomId) {
+        this.$store.dispatch('switchRoom',{roomId: roomId});
       }
     },
     mounted: function () {
