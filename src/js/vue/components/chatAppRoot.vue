@@ -5,6 +5,7 @@
 
 <script>
   var chatApp = require('./chatApp.vue');
+  var userList = require('./userList.vue');
   module.exports = {
     name: 'chatAppRoot',
     store:  AppVeuxStore,
@@ -20,10 +21,10 @@
       socket.on('statusChange', function (data) {
         this.status = data.status;
       }.bind(this))
-   },
-   components: {
-    'chatApp': chatApp
-   }
+    },
+    components: {
+      'chatApp': chatApp
+    }
   }
 </script>
 

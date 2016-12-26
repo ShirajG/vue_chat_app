@@ -2,7 +2,14 @@ Vue.use(Vuex);
 
 module.exports = new Vuex.Store({
   state: {
-    count: 0
+    count: 0,
+    room: {
+      users: [
+        {
+          name: 'testguy'
+        }
+      ]
+    }
   },
   mutations: {
     decrement: function (state) {
@@ -15,7 +22,9 @@ module.exports = new Vuex.Store({
     }
   },
   getters: {
-
+    room: function (state) {
+      return state.room
+    }
   }
 })
 
